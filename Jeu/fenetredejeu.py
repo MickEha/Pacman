@@ -1,7 +1,10 @@
 class fenetredejeu:
     def __init__(self):
-        self.R = 255
-        self.G = 215
-        self.B = 0
-        self.pacman=None
-        self.Fruit=None
+        self.Score=0
+        self.ScoreMax=0
+        self.nbVie=3
+        self.Gameover=0
+        self.Play=0
+
+    def afficher(self,core):
+        pass

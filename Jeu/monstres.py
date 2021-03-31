@@ -12,8 +12,7 @@ class Monstres:
 
 
     def afficher(self,core):
-        pass
-
+      pass
 
 
     def manger(self):

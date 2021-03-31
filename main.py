@@ -2,7 +2,9 @@
 # ehannomickael@gmail.com
 # C'est un programme pour le jeu Pac-Man
 import core
+from Jeu.fenetredejeu import fenetredejeu
 from Jeu.grossepastille import GrossePastille
+from Jeu.monstres import Monstres
 from Jeu.mur import Mur
 from Jeu.pacman import Pacman
 
@@ -14,6 +16,8 @@ joueur = Pacman()
 pastille = Pastille()
 grossepastille = GrossePastille()
 wall = Mur()
+mob=Monstres()
+game=fenetredejeu()
 
 
 
@@ -31,6 +35,8 @@ def run():
     pastille.afficher(core)
     wall.afficher(core)
     joueur.afficher(core)
+    mob.afficher(core)
+    game.afficher(core)
 
 
     #clavier

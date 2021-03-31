@@ -16,6 +16,9 @@ class Pacman:
     def afficher(self,core):
         pygame.draw.circle(core.screen, (self.R, self.G, self.B), (self.position.x, self.position.y), self.taille)
 
+
+
+
     def manger(self):
         pass
 
