@@ -4,11 +4,11 @@ from pygame.math import Vector2
 
 class Pacman:
     def __init__(self):
-        self.taille = 25
+        self.taille = 12
         self.R = 255
         self.G = 215
         self.B = 0
-        self.position = Vector2(200,200)
+        self.position = Vector2(294,406)
         self.direction = Vector2(0,0)
         self.vitesse = 5
 
@@ -19,8 +19,7 @@ class Pacman:
 
 
 
-    def manger(self):
-        pass
+
 
     def mourir(self):
         pass
@@ -35,10 +34,16 @@ class Pacman:
         elif value == "RIGHT":
             self.direction = Vector2(1, 0)
 
-    def bouger(self):
-        self.position.x=self.position.x+ (self.direction.x*self.vitesse)
-        self.position.y = self.position.y + (self.direction.y*self.vitesse)
+    def bouger(self,murs):
+            if murs.map [int((self.position.x+self.direction.x*self.vitesse)/(murs.longueur_case))][int((self.position.y+self.direction.y*self.vitesse)/(murs.longueur_case))] == 1:
+                self.direction=Vector2()
 
+            else:
+                self.position.x=self.position.x+ (self.direction.x*self.vitesse)
+                self.position.y = self.position.y + (self.direction.y*self.vitesse)
 
+    def manger(self,murs):
+        if murs.map[int((self.position.x + self.direction.x * self.vitesse) / (murs.longueur_case))][int((self.position.y + self.direction.y * self.vitesse) / (murs.longueur_case))] == 2:
+            pass
     def collision(self):
         pass

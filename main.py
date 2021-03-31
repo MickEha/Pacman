@@ -1,6 +1,7 @@
 # Mickael Ehanno, Maxence Dien
 # ehannomickael@gmail.com
 # C'est un programme pour le jeu Pac-Man
+
 import core
 from Jeu.fenetredejeu import fenetredejeu
 from Jeu.grossepastille import GrossePastille
@@ -39,6 +40,7 @@ def run():
     game.afficher(core)
 
 
+
     #clavier
     if core.getkeyPress():
         if core.getkeyPressValue()==1073741905:
@@ -51,9 +53,11 @@ def run():
             joueur.orientation("RIGHT")
 
 
-
     #update
-    joueur.bouger()
+    joueur.bouger(wall)
+    joueur.manger(wall)
+
+
 
 
 if __name__ == '__main__':

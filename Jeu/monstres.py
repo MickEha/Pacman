@@ -4,11 +4,13 @@ from pygame.math import Vector2
 
 class Monstres:
     def __init__(self):
-        self.taille = 25
-        self.R = 0
-        self.G = 0
+        self.taille = 12
+        self.R = 255
+        self.G = 215
         self.B = 0
-        self.position = Vector2(500,500)
+        self.position = Vector2(200, 200)
+        self.direction = Vector2(0, 0)
+        self.vitesse = 5
 
 
     def afficher(self,core):
