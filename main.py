@@ -3,29 +3,25 @@
 # C'est un programme pour le jeu Pac-Man
 
 import core
-from Jeu.fenetredejeu import fenetredejeu
-from Jeu.grossepastille import GrossePastille
+from Jeu import pacman
+from Jeu.fenetredejeu import Fenetredejeu
 from Jeu.monstres import Monstres
 from Jeu.mur import Mur
 from Jeu.pacman import Pacman
 
 
 #V Globale
-from Jeu.pastille import Pastille
-
 joueur = Pacman()
-pastille = Pastille()
-grossepastille = GrossePastille()
 wall = Mur()
 mob=Monstres()
-game=fenetredejeu()
+game=Fenetredejeu()
 
 
 
 def setup():
     print("Setup START---------")
     core.fps = 30
-    core.WINDOW_SIZE = [600, 600]
+    core.WINDOW_SIZE = [615, 600]
 
     print("Setup END-----------")
 
@@ -33,11 +29,14 @@ def setup():
 def run():
 
     #affichage
-    pastille.afficher(core)
     wall.afficher(core)
     joueur.afficher(core)
     mob.afficher(core)
     game.afficher(core)
+
+
+
+
 
 
 
@@ -53,9 +52,20 @@ def run():
             joueur.orientation("RIGHT")
 
 
+
     #update
     joueur.bouger(wall)
     joueur.manger(wall)
+    game.score(joueur)
+    mob.orientation(wall)
+    game.fin(joueur,mob)
+    mob.manger(joueur)
+    game.mourir(joueur,mob)
+    joueur.reset(mob,wall)
+
+
+
+
 
 
 
