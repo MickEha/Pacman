@@ -2,38 +2,23 @@ import pygame
 import core
 from pygame.math import Vector2
 import random
+from time import sleep
 
 
 class Monstres:
     def __init__(self):
         self.taille = 12
-        self.R = 0
-        self.G = 215
-        self.B = 0
         self.position = Vector2(236, 265)
         self.direction = Vector2(-1, 0)
         self.vitesse = 4
         self.condition=0
 
 
-    def afficher(self,core):
 
 
-        mob_Blinky = pygame.transform.scale(pygame.image.load("Ressources/Blinky.png"), (29, 29))
-        core.screen.blit(mob_Blinky,(self.position.x-15, self.position.y-15))
-
-        #mob_Clyde = pygame.transform.scale(pygame.image.load("Ressources/Clyde.png"), (29, 29))
-        #core.screen.blit(mob_Blinky, (self.position.x, self.position.y))
-
-       # mob_Inky = pygame.transform.scale(pygame.image.load("Ressources/Inky.png"), (29, 29))
-        #core.screen.blit(mob_Blinky, (self.position.x, self.position.y))
-
-        #mob_Pinky = pygame.transform.scale(pygame.image.load("Ressources/Pinky.png"), (29, 29))
-       # core.screen.blit(mob_Blinky, (self.position.x, self.position.y))
 
     def manger(self,pacmann):
         if self.position.x >= pacmann.position.x-15 and self.position.x <= pacmann.position.x+15 and self.position.y >= pacmann.position.y-15 and self.position.y <= pacmann.position.y+15:
-            print("dead")
             pacmann.nbvie=pacmann.nbvie-1
             pacmann.position = Vector2(294,406)
             self.position = Vector2(236, 265)
@@ -46,11 +31,6 @@ class Monstres:
 
 
 
-
-
-
-    def mourir(self):
-        pass
 
     def orientation(self,murss):
         bas = [0, 1]

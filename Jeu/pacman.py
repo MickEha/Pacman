@@ -16,13 +16,7 @@ class Pacman:
 
 
 
-
-
-    def afficher(self,core):
-        pygame.draw.circle(core.screen, (self.R, self.G, self.B), (self.position.x, self.position.y), self.taille)
-
-
-    def reset(self,mob,value):
+    def reset(self,mob):
         if mob.position == Vector2(236, 265) and mob.condition==1:
             mob.vitesse=4
             self.vitesse=4

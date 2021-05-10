@@ -22,17 +22,13 @@ def setup():
     print("Setup START---------")
     core.fps = 30
     core.WINDOW_SIZE = [615, 600]
-
     print("Setup END-----------")
 
 
 def run():
 
     #affichage
-    wall.afficher(core)
-    joueur.afficher(core)
-    mob.afficher(core)
-    game.afficher(core)
+    game.afficher(core,joueur,mob,wall)
 
 
 
@@ -61,7 +57,7 @@ def run():
     game.fin(joueur,mob)
     mob.manger(joueur)
     game.mourir(joueur,mob)
-    joueur.reset(mob,wall)
+    joueur.reset(mob)
 
 
 
