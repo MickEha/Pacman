@@ -46,6 +46,9 @@ def run():
             joueur.orientation("UP")
         elif core.getkeyPressValue()==1073741903:
             joueur.orientation("RIGHT")
+        elif core.getkeyPressValue()==32:
+                game.reset=1
+
 
 
 
@@ -53,11 +56,12 @@ def run():
     joueur.bouger(wall)
     joueur.manger(wall)
     game.score(joueur)
-    mob.orientation(wall)
+    mob.orientation(wall,joueur)
     game.fin(joueur,mob)
     mob.manger(joueur)
     game.mourir(joueur,mob)
     joueur.reset(mob)
+    game.debut(joueur,mob,wall,value=0)
 
 
 
@@ -68,5 +72,4 @@ def run():
 
 if __name__ == '__main__':
     # Mon programme
-    print("test")
     core.main(setup, run)

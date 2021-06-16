@@ -52,7 +52,6 @@ def setup():
 
 
 def run():
-    if (runfuntion is not None):
         runfuntion()
 
 

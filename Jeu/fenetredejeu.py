@@ -4,7 +4,8 @@ import core
 
 class Fenetredejeu:
     def __init__(self):
-        pass
+        self.reset=0
+
 
     def afficher(self, core,pac,mob,mur):
         font = pygame.font.Font(None, 35)
@@ -43,22 +44,35 @@ class Fenetredejeu:
 
 ##MONTRES
         mob_Blinky = pygame.transform.scale(pygame.image.load("Ressources/Blinky.png"), (29, 29))
-        core.screen.blit(mob_Blinky, (mob.position.x - 15, mob.position.y - 15))
+        core.screen.blit(mob_Blinky, (mob.positionB.x - 15, mob.positionB.y - 15))
 
         mob_Clyde = pygame.transform.scale(pygame.image.load("Ressources/Clyde.png"), (29, 29))
-        core.screen.blit(mob_Clyde, (278, 220))
-        if pac.score >= 5:
-            core.screen.blit(mob_Clyde, (236 - 15, 265 - 15))
+        if pac.score == 10:
+            mob.positionC.x=236
+            mob.positionC.y=265
+        if pac.score < 10:
+            core.screen.blit(mob_Clyde, (278, 220))
+        else:
+            core.screen.blit(mob_Clyde, (mob.positionC.x - 15, mob.positionC.y - 15))
 
         mob_Inky = pygame.transform.scale(pygame.image.load("Ressources/Inky.png"), (29, 29))
-        core.screen.blit(mob_Inky, (278, 249))
+        if pac.score == 30:
+            mob.positionI.x=236
+            mob.positionI.y=265
+        if pac.score < 30:
+            core.screen.blit(mob_Inky, (278, 249))
+        else:
+            core.screen.blit(mob_Inky, (mob.positionI.x - 15, mob.positionI.y - 15))
+
 
         mob_Pinky = pygame.transform.scale(pygame.image.load("Ressources/Pinky.png"), (29, 29))
-        core.screen.blit(mob_Pinky, (278, 275))
-
-
-
-
+        if pac.score == 50:
+            mob.positionP.x=236
+            mob.positionP.y=265
+        if pac.score < 50:
+            core.screen.blit(mob_Pinky, (278, 275))
+        else:
+            core.screen.blit(mob_Pinky, (mob.positionP.x - 15, mob.positionP.y - 15))
 
 
     def score(self,pacman):
@@ -74,16 +88,17 @@ class Fenetredejeu:
             font = pygame.font.Font(None, 70)
             text = font.render("WIN !!!!", 1, (255, 100, 255))
             core.screen.blit(text, (200, 250))
+            reset = pygame.font.Font(None, 40)
+            restart = reset.render("Appuyez sur ESPACE pour relancer le jeu !!!!", 1, (0, 200, 0))
+            core.screen.blit(restart, (30, 300))
 
 
 
 
     def fin(self,pac,mob):
-        if pac.score==205 or pac.nbvie==0:
-            mob.vitesse=0
+        if pac.score==205 or pac.nbvie==-1:
             pac.vitesse = 0
-
-
+            mob.vitesse=0
 
 
     def mourir(self,pacman,mob):
@@ -95,10 +110,74 @@ class Fenetredejeu:
             text = font.render(str(pacman.nbvie), 1, (200, 100, 30))
             core.screen.blit(text, (370, 550))
 
-            if pacman.nbvie == 0:
+            if pacman.nbvie == -1:
                 font = pygame.font.Font(None, 70)
                 text = font.render("GAME OVER !!!!", 1, (255, 100, 255))
-                core.screen.blit(text, (170, 250))
+                core.screen.blit(text, (140, 200))
+                reset = pygame.font.Font(None, 40)
+                restart = reset.render("Appuyez sur ESPACE pour relancer le jeu !!!!", 1, (0, 200, 0))
+                core.screen.blit(restart, (30,300))
+
+
+    def debut(self,pac,mob,murreset,value):
+        if pac.score==205 or pac.nbvie==-1:
+            if self.reset==1:
+                pac.nbvie=2
+                pac.score=0
+                pac.vitesse = 4
+                mob.vitesse = 4
+
+                mob.positionB.x = 236
+                mob.positionB.y = 265
+                mob.directionB.x = -1
+                mob.directionB.y = 0
+
+                mob.positionC.x = 278
+                mob.positionC.y = 220
+                mob.directionC.x = -1
+                mob.directionC.y = 0
+
+                mob.positionI.x = 278
+                mob.positionI.y = 249
+                mob.directionI.x = -1
+                mob.directionI.y = 0
+
+                mob.positionP.x = 278
+                mob.positionP.y = 275
+                mob.directionP.x = -1
+                mob.directionP.y = 0
+
+                pac.position.x = 294
+                pac.position.y = 406
+                pac.direction.x = 0
+                pac.direction.y = 0
+
+                self.reset = 0
+                murreset.map = [[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                            [1, 3, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 3, 1],
+                            [1, 2, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 2, 1],
+                            [1, 2, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 2, 1],
+                            [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
+                            [1, 2, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 2, 1],
+                            [1, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 1],
+                            [1, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 1],
+                            [1, 1, 1, 1, 2, 1, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1, 1, 1, 1],
+                            [1, 1, 1, 1, 2, 1, 2, 1, 1, 4, 1, 1, 2, 1, 2, 1, 1, 1, 1],
+                            [0, 2, 2, 2, 2, 2, 2, 1, 0, 0, 0, 1, 2, 2, 0, 2, 2, 2, 0],
+                            [1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1],
+                            [1, 1, 1, 1, 2, 1, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1, 1, 1, 1],
+                            [1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1],
+                            [1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1],
+                            [1, 2, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 2, 1],
+                            [1, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 1],
+                            [1, 1, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 1, 1],
+                            [1, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 1],
+                            [1, 2, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 2, 1],
+                            [1, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 1],
+                            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]]
+
+        else :
+            self.reset = 0
 
 
 

@@ -12,12 +12,12 @@ class Pacman:
         self.direction = Vector2(0,0)
         self.vitesse = 4
         self.score= 0
-        self.nbvie=3
+        self.nbvie=2
 
 
 
     def reset(self,mob):
-        if mob.position == Vector2(236, 265) and mob.condition==1:
+        if mob.positionB == Vector2(236, 265) or mob.positionC == Vector2(236, 265) or mob.positionI == Vector2(236, 265) or mob.positionP == Vector2(236, 265) and mob.condition==1:
             mob.vitesse=4
             self.vitesse=4
             mob.condition = 0
@@ -73,6 +73,12 @@ class Pacman:
                 self.position.x = self.position.x + (self.direction.x * self.vitesse)
                 self.position.y = self.position.y + (self.direction.y * self.vitesse)
 
+### Téléporte
+        if self.position.y>=510:
+            self.position = Vector2(294,21)
+        if self.position.y<=20:
+            self.position = Vector2(294,509)
+
 
     def manger(self,murs):
         #score pastille + 1
@@ -90,6 +96,3 @@ class Pacman:
         # remettre à 0 la liste de grosse pastille
         if murs.map[int((self.position.x + self.direction.x * self.vitesse) / (murs.longueur_case))][int((self.position.y + self.direction.y * self.vitesse) / (murs.longueur_case))] == 3:
             murs.map[int((self.position.x + self.direction.x * self.vitesse) / (murs.longueur_case))][int((self.position.y + self.direction.y * self.vitesse) / (murs.longueur_case))] = 0
-
-
-
